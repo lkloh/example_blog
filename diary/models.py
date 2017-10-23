@@ -5,31 +5,24 @@ from django.db import models
 
 # Create your models here.
 
-class Blog(models.Model):
-    name = models.CharField(max_length=100)
-    tagline = models.TextField()
-
-    def __str__(self):              # __unicode__ on Python 2
-        return self.name
-
-class Author(models.Model):
+class User(models.Model):
     name = models.CharField(max_length=200)
-    email = models.EmailField()
 
-    def __str__(self):              # __unicode__ on Python 2
-        return self.name
+    def __str__(self):
+    	return self.name
 
-class Entry(models.Model):
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
-    headline = models.CharField(max_length=255)
-    body_text = models.TextField()
-    pub_date = models.DateField()
-    mod_date = models.DateField()
-    authors = models.ManyToManyField(Author)
-    n_comments = models.IntegerField()
-    n_pingbacks = models.IntegerField()
-    rating = models.IntegerField()
+class Post(models.Model):
+	text = models.CharField(max_length=4000)
+	author = models.ForeignKey(User)
 
-    def __str__(self):              # __unicode__ on Python 2
-        return self.headline
+	def __str__(self):
+		return self.text
 
+class Comment(models.Model):
+	text = models.CharField(max_length=400)
+	post = models.ForeignKey(Post)
+	commenter = models.ForeignKey(User)
+ 	hidden = models.BooleanField(default=False)
+
+ 	def __str__(self):
+		return 'Comment: %s, Post: %s, Commenter: %s' % (self.text, str(self.post), str(self.commenter))
