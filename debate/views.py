@@ -9,3 +9,6 @@ from django.shortcuts import render
 
 def index(request):
     return HttpResponse("Hello world")
+
+def user_list(request):
+	return HttpResponse("User List")
