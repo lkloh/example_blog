@@ -16,3 +16,7 @@ optimize code written in Django.
 * username: `admin`
 * email: `admin@example.com`
 * password: `helloworld`
+
+## Resources
+
+http://kennethjiang.blogspot.com/2016/01/advanced-usage-of-prefetchrelated-and.html

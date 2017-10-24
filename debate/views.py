@@ -18,3 +18,10 @@ def users(request):
 def posts(request):
 	posts = [post for post in Post.objects.all()]
 	return render(request, 'debate/posts.html', {'posts': posts})
+
+def post_detail(request, post_id):
+	try:
+		post = Post.objects.get(pk=post_id)
+	except Post.DoesNotExist:
+		raise Http404('Post does not exist')
+	return render(request, 'debate/post_detail.html', {'post': post})
