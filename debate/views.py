@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from debate.models import User, Post, Comment
 
@@ -20,8 +20,5 @@ def posts(request):
 	return render(request, 'debate/posts.html', {'posts': posts})
 
 def post_detail(request, post_id):
-	try:
-		post = Post.objects.get(pk=post_id)
-	except Post.DoesNotExist:
-		raise Http404('Post does not exist')
+	post = get_object_or_404(Post, pk=post_id)
 	return render(request, 'debate/post_detail.html', {'post': post})
